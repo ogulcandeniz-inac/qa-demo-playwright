@@ -1,10 +1,17 @@
 import { test } from '@playwright/test';
 import { CheckboxPage } from '../pages/checkboxPage';
 
-test('should check Notes checkbox and verify result', async ({ page }) => {
+test('should check and uncheck Desktop checkbox', async ({ page }) => {
   const checkboxPage = new CheckboxPage(page);
+
   await checkboxPage.goto();
   await checkboxPage.expandAll();
-  await checkboxPage.checkNotes();
-  await checkboxPage.verifyResult('notes');
+
+  // Seç
+  await checkboxPage.toggleDesktopCheckbox();
+  await checkboxPage.expectResultToContain('desktop');
+
+  // Kaldır
+  await checkboxPage.toggleDesktopCheckbox();
+  await checkboxPage.expectResultNotToContain('desktop');
 });

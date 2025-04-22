@@ -5,19 +5,33 @@ export class CheckboxPage {
 
   async goto() {
     await this.page.goto('https://demoqa.com/checkbox');
-    await this.page.waitForSelector('.rct-checkbox'); // checkbox yüklenmesini bekle
   }
 
   async expandAll() {
-    await this.page.click('.rct-option-expand-all');
+    const expandButton = this.page.locator('button[title="Expand all"]');
+    await expandButton.click();
   }
 
-  async checkNotes() {
-    await this.page.click('label[for="tree-node-notes"] span.rct-checkbox');
+  async toggleDesktopCheckbox() {
+    const desktopCheckbox = this.page.locator('label[for="tree-node-desktop"] span.rct-checkbox');
+    await desktopCheckbox.click();
   }
 
-  async verifyResult(expected: string) {
-    const result = await this.page.locator('#result').textContent();
-    expect(result).toContain(expected);
+  async expectResultToContain(text: string) {
+    const result = this.page.locator('#result');
+    await expect(result).toContainText(text);
   }
+
+  async expectResultNotToContain(text: string) {
+    const result = this.page.locator('#result');
+    const isVisible = await result.isVisible();
+  
+    if (isVisible) {
+      await expect(result).not.toContainText(text);
+    } else {
+      // Hiçbir sonuç yoksa da bu bizim için "başarılı" sayılır
+      console.log('Result elementi görünmüyor, test geçerli sayıldı.');
+    }
+  }
+  
 }
