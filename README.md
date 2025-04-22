@@ -25,7 +25,8 @@ login-test-suite/
 │   ├── login-success.spec.ts       # Başarılı giriş testi
 │   ├── login-fail.spec.ts          # Geçersiz giriş testleri
 │   ├── logout-after-login.spec.ts  # Logout kontrol testi
-│   └── checkbox.spec.ts            # Checkbox testi
+│   ├── checkbox.spec.ts            # Checkbox testi
+│   └── cart-add-remove.spec.ts     # Kitap ekle / sil testi (detay sayfası sorunluysa yorumlanmalı)
 ├── playwright.config.ts     # Playwright yapılandırma dosyası
 ├── README.md                # Proje açıklamaları
 ```
@@ -72,5 +73,12 @@ login-test-suite/
 
 ### ☑️ UI Bileşeni Testi
 
-- Checkbox sayfasında “Notes” seçeneğinin tıklanması
+- Checkbox sayfasında “Desktop” seçimi ve kaldırılması
 - Seçilen kutunun doğru şekilde DOM’da görüntülenmesi
+- Sonucun kaldırılmasıyla birlikte DOM'dan silindiğinin kontrolü
+
+### 📚 Kitap Koleksiyonu Testi
+
+- Giriş yaptıktan sonra bir kitabın detay sayfasına gidilmesi
+- Koleksiyona kitap eklenmesi ve profil sayfasında kontrol edilmesi
+- Tüm kitapların silinmesi ve “No rows found” mesajı doğrulaması
